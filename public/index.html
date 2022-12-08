@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <script src="wasm_exec.js"></script>
+    <script>
+      const go = new Go();
+      WebAssembly.instantiateStreaming(fetch('calculator.wasm'), go.importObject).then((result) => {
+        go.run(result.instance);
+      });
+    </script>
+  </head>
+  <body>
+    <h1>Calculator</h1>
+    <input type="text" id="input" />
+    <button id="calculateSquare">Calculate Square</button>
+    <button id="calculateCube">Calculate Cube</button>
+  </body>
+  <script>
+    document.getElementById('calculateSquare').addEventListener('click', () => {
+      console.log('Hello from JS');
+      const input = parseInt(document.getElementById('input').value);
+      const result = calculateSquare(input);
+      alert(`Square of ${input} is ${result}`);
+    });
+
+    document.getElementById('calculateCube').addEventListener('click', () => {
+      console.log('Hello from JS');
+      const input = parseInt(document.getElementById('input').value);
+      const result = calculateCube(input);
+      alert(`Cube of ${input} is ${result}`);
+    });
+  </script>
+</html>
